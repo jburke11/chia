@@ -1,0 +1,444 @@
+<!--
+=========================================================
+* Argon Design System - v1.2.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-design-system
+* Copyright 2020 Creative Tim (http://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <title>
+    ChiaDB Search Tools
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link href="./assets/css/font-awesome.css" rel="stylesheet" />
+  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="./assets/css/argon-design-system.css?v=1.2.0" rel="stylesheet" />
+  <!--   Core JS Files   -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+  <script src="./assets/js/plugins/bootstrap-switch.js"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/moment.min.js"></script>
+  <script src="./assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/bootstrap-datepicker.min.js"></script>
+  <!-- Control Center for Argon UI Kit: parallax effects, scripts for the example pages etc -->
+  <!--  Google Maps Plugin    -->
+  <script src="./assets/js/argon-design-system.min.js?v=1.2.0" type="text/javascript"></script>
+  <script>
+    function scrollToDownload() {
+
+      if ($('.section-download').length != 0) {
+        $("html, body").animate({
+          scrollTop: $('.section-download').offset().top
+        }, 1000);
+      }
+    }
+  </script>
+</head>
+
+<body class="index-page">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-default">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">ChiaDB</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-default">
+            <div class="navbar-collapse-header">
+                <div class="row">
+                    <div class="col-6 collapse-brand">
+                        <a href="index.html">
+                            CHIADB
+                        </a>
+                    </div>
+                    <div class="col-6 collapse-close">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="navbar-nav ml-lg-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="search.html">
+                      Search Tools
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="downloads.html">
+                        Downloads
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="downloads.html">
+                        About
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+  <!-- End Navbar -->
+  <div class="wrapper" id="wrapper">
+
+    <div class="section section-components">
+      <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-12 mb-sm-8">
+              <!-- Tabs -->
+              <div class="mb-3">
+                <small class="text-uppercase font-weight-bold">click on a choice below to open a query form </small>
+              </div>
+              <div class="nav-wrapper">
+                <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true">Functional Annotation Keyword</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false">Interpro ID and Keyword</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false">GO ID and Keyword</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-4" aria-selected="false">Sequence ID</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-5" aria-selected="false">Sequence Retriever</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card shadow">
+                <div class="card-body">
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
+                      <form>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <p class="description">Keyword:</p>
+
+                            <p class="description"> Examples: Kinase, Hydrolase, Aquaporin
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <input class="form-control" id="func_anno" placeholder="Keyword"></input>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      <div class="text-center">
+                      <button type="button" class="btn btn-primary" v-on:click="func_anno_search">Submit</button>
+                    </div>
+                    </div>
+                    <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
+                      <form>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <p class="description">Keyword or Interpro ID:</p>
+
+                            <p class="description"> Examples: Kinase, Hydrolase, Aquaporin, IPR004274
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <input class="form-control" id="interpro" placeholder="Keyword or Interpro ID"></input>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      <div class="text-center">
+                      <button type="button" class="btn btn-primary"  v-on:click="interpro_search">Submit</button>
+                    </div>
+                    </div>
+                    <div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
+                      <form>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <p class="description">Keyword or GO ID:</p>
+
+                            <p class="description"> Examples: Kinase, Hydrolase, Aquaporin, GO:0004650, GO:0004553
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <input class="form-control" id="go" placeholder="Keyword or GO ID"></input>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      <div class="text-center">
+                      <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                    </div>
+                    <div class="tab-pane fade" id="tabs-icons-text-4" role="tabpanel" aria-labelledby="tabs-icons-text-4-tab">
+                      <form>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <p class="description">Transcript ID:</p>
+
+                            <p class="description"> Examples: Salhi.01G743300.1, Salhi.03G612000.2, Salhi.04G466100.1
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <input class="form-control" id="go" placeholder="Transcript ID"></input>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      <div class="text-center">
+                      <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                    </div>
+                    <div class="tab-pane fade" id="tabs-icons-text-5" role="tabpanel" aria-labelledby="tabs-icons-text-5-tab">
+                      <form>
+                        <div class="row">
+                          <div class="col-md-6 mb-sm-3">
+                            <h5>Retrieve the sequence for a given region</h5>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 mb-sm-3">
+                            <p class="description">Chromosome:</p>
+
+                            <p class="description"> Examples: Chr1, Chr2, Chr3</p>
+                          </div>
+                          <div class="col-md-6 mb-sm-3">
+                            <div class="form-group">
+                              <input class="form-control" id="chr_seq_chr" placeholder="Chromosome"></input>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 mb-sm-3">
+                            <p class="description">Start Coordinate:</p>
+
+                            <p class="description"> Note: This parameter is optional</p>
+                          </div>
+                          <div class="col-md-6 mb-sm-3">
+                            <div class="form-group">
+                              <input class="form-control" id="chr_seq_start" placeholder="Start"></input>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 mb-sm-3">
+                            <p class="description">End Coordinate:</p>
+
+                            <p class="description"> Note: This parameter is optional</p>
+                          </div>
+                          <div class="col-md-6 mb-sm-3">
+                            <div class="form-group">
+                              <input class="form-control" id="chr_seq_stop" placeholder="End"></input>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      <div class="text-center mb-sm-6">
+                      <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                    <hr>
+                    <form>
+                      <div class="row">
+                        <div class="col-md-6 mb-sm-3">
+                          <h5> Retrieve the sequence for a gene or transcript </h5>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 mb-sm-3">
+                          <p class="description">Transcript ID:</p>
+
+                          <p class="description"> Examples: Salhi.01G743300.1, Salhi.03G612000.2, Salhi.04G466100.1 </p>
+                        </div>
+                        <div class="col-md-6 mb-sm-3">
+                          <div class="form-group">
+                            <input class="form-control" id="transcript_seq" placeholder="Keyword"></input>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 mb-sm-3">
+                          <p class="description">Sequence Type</p>
+                        </div>
+                        <div class="col-md-6 mb-sm-3">
+                          <div class="custom-control custom-radio mb-3">
+                            <input name="custom-radio-1" class="custom-control-input" id="customRadio1" type="radio"></input>
+                            <label class="custom-control-label" for="customRadio1">cDNA</label>
+                          </div>
+                          <div class="custom-control custom-radio mb-3">
+                            <input name="custom-radio-1" class="custom-control-input" id="customRadio2" type="radio"></input>
+                            <label class="custom-control-label" for="customRadio2">CDS</label>
+                          </div>
+                          <div class="custom-control custom-radio mb-3">
+                            <input name="custom-radio-1" class="custom-control-input" id="customRadio3" type="radio"></input>
+                            <label class="custom-control-label" for="customRadio3">Protein</label>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="text-center mb-sm-6">
+                    <button type="button" class="btn btn-primary">Submit</button>
+                  </div>
+                  <hr>
+                  <form>
+                    <div class="row">
+                      <div class="col-lg-12 mb-sm-3">
+                        <h5> Retrieve the sequence immediately upstream or downstream form a gene or transcript </h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-sm-3">
+                        <p class="description">Base Pairs:</p>
+                      </div>
+                      <div class="col-md-6 mb-sm-3">
+                        <div class="form-group">
+                          <input class="form-control" id="flank_seq_bp" placeholder="BP"></input>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-sm-3">
+                        <p class="description">Direction:</p>
+                      </div>
+                      <div class="col-md-6 mb-sm-3">
+                        <div class="custom-control custom-radio mb-3">
+                          <input name="custom-radio-2" class="custom-control-input" id="customRadio4" type="radio"></input>
+                          <label class="custom-control-label" for="customRadio4">Upstream</label>
+                        </div>
+                        <div class="custom-control custom-radio mb-3">
+                          <input name="custom-radio-2" class="custom-control-input" id="customRadio5" type="radio"></input>
+                          <label class="custom-control-label" for="customRadio5">Downstream</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-sm-3">
+                        <p class="description">Transcript ID:</p>
+
+                        <p class="description"> Examples: Salhi.01G743300.1, Salhi.03G612000.2, Salhi.04G466100.1 </p>
+                      </div>
+                      <div class="col-md-6 mb-sm-3">
+                        <div class="form-group">
+                          <input class="form-control" id="flank_id" placeholder="Keyword"></input>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="text-center mb-sm-6">
+                  <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  <footer class="footer">
+    <div class="container">
+      <hr>
+      <div class="row align-items-center justify-content-md-between">
+        <div class="col-md-6">
+          <div class="copyright">
+            &copy; 2020 <a href="" target="_blank">Creative Tim</a>.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <ul class="nav nav-footer justify-content-end">
+            <li class="nav-item">
+              <a href="" class="nav-link" target="_blank">Creative Tim</a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link" target="_blank">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link" target="_blank">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link" target="_blank">License</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  </div>
+</div>
+</body>
+<!-- begin vue -->
+<script>
+var app = new Vue({
+  el: "#wrapper",
+  methods: {
+    func_anno_search: function(){
+      var search_terms = $("input[id=func_anno]").val();
+      var url = "http://127.0.0.1:8000/func_anno/" + search_terms;
+      $.get(url, function(data, response){
+        sessionStorage.setItem("func_anno", JSON.stringify(data));
+        window.open("annotation_search_results.html", "_self");
+      })
+      .fail(function(xhr){
+        var status = xhr.status
+        if (status == 404){
+          alert("No matches found, please try another search");
+        }
+        else{
+          alert("Error in fetching data from the server");
+        }
+      });
+    },
+    interpro_search: function(){
+      var search_terms = $("input[id=interpro]").val();
+      var type;
+      var regx = RegExp('IPR*');
+      if (regx.test(search_terms) == true){
+        type = "id";
+      }
+      else{
+        type = "keyword";
+      }
+      var url = "http://127.0.0.1:8000/interpro/" + type + "/" + search_terms;
+      $.get(url, function(data, response){
+        sessionStorage.setItem("ipr_search", JSON.stringify(data));
+        window.open("interpro_search_results.html", "_self");
+      })
+      .fail(function(xhr){
+        var status = xhr.status
+        if (status == 404){
+          alert("No matches found, please try another search");
+        }
+        else{
+          alert("Error in fetching data from the server");
+        }
+      });
+    }
+  }
+})
+</script>
+</html>
