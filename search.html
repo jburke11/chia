@@ -194,7 +194,7 @@ Coded by www.creative-tim.com
                         </div>
                       </form>
                       <div class="text-center">
-                      <button type="button" class="btn btn-primary">Submit</button>
+                      <button type="button" class="btn btn-primary" v-on:click="go_search">Submit</button>
                     </div>
                     </div>
                     <div class="tab-pane fade" id="tabs-icons-text-4" role="tabpanel" aria-labelledby="tabs-icons-text-4-tab">
@@ -261,7 +261,7 @@ Coded by www.creative-tim.com
                         </div>
                       </form>
                       <div class="text-center mb-sm-6">
-                      <button type="button" class="btn btn-primary">Submit</button>
+                      <button type="button" class="btn btn-primary" v-on:click="region_search">Submit</button>
                     </div>
                     <hr>
                     <form>
@@ -288,22 +288,22 @@ Coded by www.creative-tim.com
                         </div>
                         <div class="col-md-6 mb-sm-3">
                           <div class="custom-control custom-radio mb-3">
-                            <input name="custom-radio-1" class="custom-control-input" id="customRadio1" type="radio"></input>
+                            <input name="seq_search" class="custom-control-input" id="customRadio1" type="radio" value="cDNA"></input>
                             <label class="custom-control-label" for="customRadio1">cDNA</label>
                           </div>
                           <div class="custom-control custom-radio mb-3">
-                            <input name="custom-radio-1" class="custom-control-input" id="customRadio2" type="radio"></input>
+                            <input name="seq_search" class="custom-control-input" id="customRadio2" type="radio" value="CDS"></input>
                             <label class="custom-control-label" for="customRadio2">CDS</label>
                           </div>
                           <div class="custom-control custom-radio mb-3">
-                            <input name="custom-radio-1" class="custom-control-input" id="customRadio3" type="radio"></input>
+                            <input name="seq_search" class="custom-control-input" id="customRadio3" type="radio" value="Protein"></input>
                             <label class="custom-control-label" for="customRadio3">Protein</label>
                           </div>
                         </div>
                       </div>
                     </form>
                     <div class="text-center mb-sm-6">
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-primary" v-on:click="sequence_search">Submit</button>
                   </div>
                   <hr>
                   <form>
@@ -328,11 +328,11 @@ Coded by www.creative-tim.com
                       </div>
                       <div class="col-md-6 mb-sm-3">
                         <div class="custom-control custom-radio mb-3">
-                          <input name="custom-radio-2" class="custom-control-input" id="customRadio4" type="radio"></input>
+                          <input name="flank_direction" class="custom-control-input" id="customRadio4" type="radio" value="upstream"></input>
                           <label class="custom-control-label" for="customRadio4">Upstream</label>
                         </div>
                         <div class="custom-control custom-radio mb-3">
-                          <input name="custom-radio-2" class="custom-control-input" id="customRadio5" type="radio"></input>
+                          <input name="flank_direction" class="custom-control-input" id="customRadio5" type="radio" value="downstream"></input>
                           <label class="custom-control-label" for="customRadio5">Downstream</label>
                         </div>
                       </div>
@@ -351,7 +351,7 @@ Coded by www.creative-tim.com
                     </div>
                   </form>
                   <div class="text-center mb-sm-6">
-                  <button type="button" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-primary" v-on:click="flanking_seq">Submit</button>
                 </div>
                     </div>
                   </div>
@@ -437,6 +437,114 @@ var app = new Vue({
           alert("Error in fetching data from the server");
         }
       });
+    },
+    go_search: function(){
+      var search_terms = $("input[id=go]").val();
+      var type;
+      var regx = RegExp('GO*');
+      if (regx.test(search_terms) == true){
+        type="id";
+      }
+      else{
+        type = "keyword";
+      }
+      var url = "http://127.0.0.1:8000/go/" + type + "/" + search_terms;
+      $.get(url, function(data, response){
+        sessionStorage.setItem("go_search", JSON.stringify(data));
+        window.open("go_search_results.html", "_self");
+      })
+      .fail(function(xhr){
+        var status = xhr.status
+        if (status == 404){
+          alert("No matches found, please try another search");
+        }
+        else{
+          alert("Error in fetching data from the server");
+        }
+      });
+    },
+    region_search: function(){
+      var chromosome = $("input[id=chr_seq_chr]").val();
+      var start = $("input[id=chr_seq_start]").val();
+      var stop = $("input[id=chr_seq_stop]").val();
+      var url;
+      if (start && stop){
+        url = "http://127.0.0.1:8000/seq_chr/" + chromosome + "?" + "start=" + start + "&" + "stop=" + stop;
+      }
+      else if (start && !stop){
+        url = "http://127.0.0.1:8000/seq_chr/" + chromosome + "?" + "start=" + start;
+      }
+      else if (stop && !start){
+        url = "http://127.0.0.1:8000/seq_chr/" + chromosome + "?" + "stop=" + stop;
+      }
+      else{
+        url = "http://127.0.0.1:8000/seq_chr/" + chromosome;
+      }
+      $.get(url, function(data, response){
+        if (JSON.stringify(data).length > 100000){
+          alert("sequence is too large, please use our API");
+        }
+        else{
+        sessionStorage.setItem("seq_region", JSON.stringify(data));
+        window.open("retrieve_region.html", "_self");
+      }
+      })
+      .fail(function(xhr){
+        var status = xhr.status
+        if (status == 404){
+          alert("No matches found, please try another search");
+        }
+        else{
+          alert("Error in fetching data from the server");
+        }
+      });
+    },
+    sequence_search: function(){
+      var transcript_id = $("input[id=transcript_seq]").val();
+      var type = $("input[name=seq_search]:checked").val();
+      var url = "http://127.0.0.1:8000/seq/" + type + "/" + transcript_id;
+      $.get(url, function(data, response){
+        sessionStorage.setItem("seq_search", JSON.stringify(data));
+        window.open("sequence_search.html", "_self");
+      })
+      .fail(function(xhr){
+        var status = xhr.status
+        if (status == 404){
+          alert("No matches found, please try another search");
+        }
+        else{
+          alert("Error in fetching data from the server");
+        }
+      });
+    },
+    flanking_seq: function(){
+      var bp = $("input[id=flank_seq_bp]").val();
+      if (bp < 0){
+        alert("bp must be a positive integer");
+      }
+      else{
+        var direction = $("input[name=flank_direction]:checked").val();
+        var transcript_id = $("input[id=flank_id]").val();
+        var url = "http://127.0.0.1:8000/flanking_seq/" + direction + "/" + transcript_id + "/" + bp;
+        $.get(url, function(data, response){
+          if (JSON.stringify(data).length > 100000){
+            alert("sequence is too large, please use our API");
+          }
+          else{
+          sessionStorage.setItem("flank_search", JSON.stringify(data));
+          window.open("flanking_sequence_search.html", "_self");
+        }
+        })
+        .fail(function(xhr){
+          var status = xhr.status
+          if (status == 404){
+            alert("No matches found, please try another search");
+          }
+          else{
+            alert("Error in fetching data from the server");
+          }
+        });
+    }
     }
   }
 })

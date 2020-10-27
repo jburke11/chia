@@ -144,7 +144,7 @@ Coded by www.creative-tim.com
             </nav>
           </div>
           <div class="col-lg-8 text-right">
-            <a href="javascript:JSON.stringify(ipr_data);" download="func_anno_search.json">Download this search in JSON!</a>
+            <a href="javascript:JSON.stringify(go_data);" download="func_anno_search.json">Download this search in JSON!</a>
           </div>
         </div>
           <div class="row justify-content-center">
@@ -153,18 +153,18 @@ Coded by www.creative-tim.com
                   <thead>
                       <tr>
                           <th class="text-center">Sequence ID</th>
-                          <th class="text-center">InterProScan ID</th>
-                          <th class="text-center">Scanning Application</th>
+                          <th class="text-center">GO ID</th>
+                          <th class="text-center">GO Type</th>
                           <th class="text-center">Description</th>
                       </tr>
                   </thead>
                   <tbody>
                     <template v-for="item in get_pages">
-                      <tr v-for="thing in item.model_iprscan">
+                      <tr v-for="thing in item.model_go">
                           <td class="text-center">{{item.transcript_id}}</td>
-                          <td class="text-center">{{thing.interpro_accession}}</td>
-                          <td class="text-center">{{thing.method}}</td>
-                          <td class="text-center">{{thing.method_description}}</td>
+                          <td class="text-center">{{thing.go_accession}}</td>
+                          <td class="text-center">{{thing.go_type}}</td>
+                          <td class="text-center">{{thing.go_name}}</td>
                       </tr>
                     </template>
                   </tbody>
@@ -208,10 +208,10 @@ Coded by www.creative-tim.com
     </div>
 </body>
 <script>
-var ipr_data = JSON.parse(sessionStorage.getItem("ipr_search"));
+var go_data = JSON.parse(sessionStorage.getItem("go_search"));
 var app = new Vue({
   el: "#wrapper",
-  data: {ipr_data,
+  data: {go_data,
         index1: 0,
         index2: 25,
         page: 1
@@ -219,8 +219,8 @@ var app = new Vue({
   methods: {
           next_page: function(){
             this.index1 += 25;
-            if (this.index2 + 25 >= this.ipr_data.iprscan_search.length){
-              this.index2 = this.ipr_data.iprscan_search.length;
+            if (this.index2 + 25 >= this.go_data.GO_results.length){
+              this.index2 = this.go_data.GO_results.length;
             }
             else {
               this.index2 += 25;
@@ -243,10 +243,10 @@ var app = new Vue({
         },
         computed:{
           func_search_length: function(){
-            return this.ipr_data.iprscan_search.length;
+            return this.go_data.GO_results.length;
           },
           get_pages: function(){
-            return this.ipr_data.iprscan_search.slice(this.index1, this.index2);
+            return this.go_data.GO_results.slice(this.index1, this.index2);
           }
         }
 })
