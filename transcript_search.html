@@ -1,0 +1,438 @@
+<!--
+=========================================================
+* Argon Design System - v1.2.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-design-system
+* Copyright 2020 Creative Tim (http://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <title>
+    ChiaDB Search Tools
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link href="./assets/css/font-awesome.css" rel="stylesheet" />
+  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="./assets/css/argon-design-system.css?v=1.2.0" rel="stylesheet" />
+  <!--   Core JS Files   -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+  <script src="./assets/js/plugins/bootstrap-switch.js"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/moment.min.js"></script>
+  <script src="./assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/bootstrap-datepicker.min.js"></script>
+  <!-- Control Center for Argon UI Kit: parallax effects, scripts for the example pages etc -->
+  <!--  Google Maps Plugin    -->
+  <script src="./assets/js/argon-design-system.min.js?v=1.2.0" type="text/javascript"></script>
+  <script>
+    function scrollToDownload() {
+
+      if ($('.section-download').length != 0) {
+        $("html, body").animate({
+          scrollTop: $('.section-download').offset().top
+        }, 1000);
+      }
+    }
+  </script>
+</head>
+
+<body class="index-page">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-default">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">ChiaDB</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-default">
+            <div class="navbar-collapse-header">
+                <div class="row">
+                    <div class="col-6 collapse-brand">
+                        <a href="index.html">
+                            CHIADB
+                        </a>
+                    </div>
+                    <div class="col-6 collapse-close">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="navbar-nav ml-lg-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="search.html">
+                      Search Tools
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="downloads.html">
+                        Downloads
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="downloads.html">
+                        About
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+  <!-- End Navbar -->
+  <div class="wrapper" id="wrapper">
+    <div class="section section-components">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-12">
+          <div class="card shadow">
+            <div class="card-header text-center">
+                <div class= "row">
+                  <div class="col-sm-4">
+                    <i>Salvia hispanica</i>
+                  </div>
+                  <div class=col-sm-4>
+                    <p> {{transcript_data.transcript_id}}</p>
+                  </div>
+                  <div class="col-sm-4">
+                    <p> DATABASE VERSION</p>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class=col-sm-4>
+                    <a href="javascript:JSON.stringify(transcript_data);" download="transcript_search.json">Download this search in JSON!</a>
+                  </div>
+                </div>
+            </div>
+            <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <b>Gene identification</b>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p><b>Putative Function:</b> {{transcript_data.func_anno}}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p><b>Locus Name:</b> {{transcript_data.gene_id}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <b>Gene Attributes</b>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p><b>Scaffold:</b> {{transcript_data.scaffold}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p><b>mRNA Genomic Coords (5'-3'): </b> {{transcript_data.start}} - {{transcript_data.stop}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p><b>CDS length:</b> {{transcript_data.cds.length}}nt</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p><b>Protein Length:</b> {{transcript_data.protein.length}}aa</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <template v-if="transcript_data.model_go.length > 0">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header">
+                <b>Gene Ontology Classification</b>
+              </div>
+              <div class="card-body">
+                <div class="row justify-content-center">
+                  <div class="col-lg-12">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">GO accession</th>
+                                <th class="text-center">Type</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Code</th>
+                                <th class="text-center">With</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="go_data in transcript_data.model_go">
+                                <td class="text-center">{{go_data.go_accession}}</td>
+                                <td class="text-center">{{go_data.go_type}}</td>
+                                <td class="text-center">{{go_data.go_name}}</td>
+                                <td class="text-center">{{go_data.go_ev_code}}</td>
+                                <td class="text-center">{{go_data.go_dbxref}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </template>
+    <template v-if="transcript_data.diamond_results.length > 0">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <b>Diamond Blastp Searches (Uniref 100)</b>
+          </div>
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col-lg-12">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Accession</th>
+                            <th class="text-center">% Sim</th>
+                            <th class="text-center">% Cov</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">P-value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="blast_data in transcript_data.diamond_results">
+                            <td class="text-center">{{blast_data.accession}}</td>
+                            <td class="text-center">{{blast_data.per_sim}}</td>
+                            <td class="text-center">{{blast_data.per_cov}}</td>
+                            <td class="text-center">{{blast_data.description}}</td>
+                            <td class="text-center">{{blast_data.pvalue}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</template>
+<template v-if="transcript_data.model_pfam.length > 0">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <b>PFAM Hits</b>
+      </div>
+      <div class="card-body">
+        <div class="row justify-content-center">
+          <div class="col-lg-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">Accession</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Match Start</th>
+                        <th class="text-center">Match End</th>
+                        <th class="text-center">E-value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="pfam_data in transcript_data.model_pfam">
+                        <td class="text-center">{{pfam_data.hmm_acc}}</td>
+                        <td class="text-center">{{pfam_data.hmm_name}}</td>
+                        <td class="text-center">{{pfam_data.protein_match_start}}</td>
+                        <td class="text-center">{{pfam_data.protein_match_end}}</td>
+                        <td class="text-center">{{pfam_data.evalue}}</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<template v-if="transcript_data.model_iprscan.length > 0">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <b>Interpro Hits</b>
+      </div>
+      <div class="card-body">
+        <div class="row justify-content-center">
+          <div class="col-lg-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">Interpro Accession</th>
+                        <th class="text-center">Method</th>
+                        <th class="text-center">Method Description</th>
+                        <th class="text-center">Match Start</th>
+                        <th class="text-center">Match End</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="ipr_data in transcript_data.model_iprscan">
+                        <td class="text-center">{{ipr_data.interpro_accession}}</td>
+                        <td class="text-center">{{ipr_data.method}}</td>
+                        <td class="text-center">{{ipr_data.interpro_description}}</td>
+                        <td class="text-center">{{ipr_data.match_start}}</td>
+                        <td class="text-center">{{ipr_data.match_end}}</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<template v-if="transcript_data.ssr.length > 0">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <b>Putative Simple Sequence Repeats</b>
+      </div>
+      <div class="card-body">
+        <div class="row justify-content-center">
+          <div class="col-lg-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">Scaffold</th>
+                        <th class="text-center">SSR Start</th>
+                        <th class="text-center">SSR End</th>
+                        <th class="text-center">motif</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="repeat in transcript_data.ssr">
+                        <td class="text-center">{{repeat.scaffold}}</td>
+                        <td class="text-center">{{repeat.end5}}</td>
+                        <td class="text-center">{{repeat.end3}}</td>
+                        <td class="text-center">({{repeat.motif.toUpperCase()}})<sub>{{repeat.ssr_length}}</sub></td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <b>Coding sequence (CDS)</b>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>>{{transcript_data.transcript_id}} | CDS</p>
+            <p>{{transcript_data.cds}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <b>Transcript Sequence (cDNA)</b>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>>{{transcript_data.transcript_id}} | cDNA</p>
+            <p>{{transcript_data.cdna}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <b>Protein Sequence</b>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>>{{transcript_data.transcript_id}} | Protein</p>
+            <p>{{transcript_data.protein}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+</body>
+<script>
+var transcript_data = JSON.parse(sessionStorage.getItem("transcript_search"));
+var app = new Vue({
+  el: "#wrapper",
+  data: {transcript_data
+      }
+})
+</script>
+</html>

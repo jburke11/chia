@@ -207,13 +207,13 @@ Coded by www.creative-tim.com
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
-                              <input class="form-control" id="go" placeholder="Transcript ID"></input>
+                              <input class="form-control" id="transcript_id" placeholder="Transcript ID"></input>
                             </div>
                           </div>
                         </div>
                       </form>
                       <div class="text-center">
-                      <button type="button" class="btn btn-primary">Submit</button>
+                      <button type="button" class="btn btn-primary" v-on:click="transcript_search">Submit</button>
                     </div>
                     </div>
                     <div class="tab-pane fade" id="tabs-icons-text-5" role="tabpanel" aria-labelledby="tabs-icons-text-5-tab">
@@ -345,7 +345,7 @@ Coded by www.creative-tim.com
                       </div>
                       <div class="col-md-6 mb-sm-3">
                         <div class="form-group">
-                          <input class="form-control" id="flank_id" placeholder="Keyword"></input>
+                          <input class="form-control" id="flank_id" placeholder="Transcript ID"></input>
                         </div>
                       </div>
                     </div>
@@ -425,8 +425,13 @@ var app = new Vue({
       }
       var url = "http://127.0.0.1:8000/interpro/" + type + "/" + search_terms;
       $.get(url, function(data, response){
+        if (data.iprscan_search.length  == 0){
+          alert("No results found, please try another search")
+        }
+        else{
         sessionStorage.setItem("ipr_search", JSON.stringify(data));
         window.open("interpro_search_results.html", "_self");
+      }
       })
       .fail(function(xhr){
         var status = xhr.status
@@ -450,8 +455,13 @@ var app = new Vue({
       }
       var url = "http://127.0.0.1:8000/go/" + type + "/" + search_terms;
       $.get(url, function(data, response){
+        if (data.GO_results.length == 0){
+          alert("No results found, please try another search");
+        }
+        else{
         sessionStorage.setItem("go_search", JSON.stringify(data));
         window.open("go_search_results.html", "_self");
+      }
       })
       .fail(function(xhr){
         var status = xhr.status
@@ -545,7 +555,24 @@ var app = new Vue({
           }
         });
     }
-    }
+  },
+  transcript_search: function(){
+    var transcript_id = $("input[id=transcript_id]").val();
+    var url = "http://127.0.0.1:8000/id/" + transcript_id;
+    $.get(url, function(data, response){
+      sessionStorage.setItem("transcript_search", JSON.stringify(data));
+      window.open("transcript_search.html", "_self");
+    })
+    .fail(function(xhr){
+      var status = xhr.status
+      if (status == 404){
+        alert("No matches found, please try another search");
+      }
+      else{
+        alert("Error in fetching data from the server");
+      }
+    });
+  }
   }
 })
 </script>
