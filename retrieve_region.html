@@ -138,4 +138,9 @@ var app = new Vue({
       }
 })
 </script>
+<script>
+window.onbeforeunload = function(e){
+  sessionStorage.clear()
+}
+</script>
 </html>
