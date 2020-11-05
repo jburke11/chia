@@ -114,6 +114,12 @@ Coded by www.creative-tim.com
       <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-12 mb-sm-8">
+              <template v-if="loading == 1">
+                <div class="align-content-cetner">
+                <img src="assets/img/loading.gif" class="mx-auto d-block"></img>
+              </div>
+              </template>
+              <template v-else>
               <!-- Tabs -->
               <div class="mb-3">
                 <small class="text-uppercase font-weight-bold">click on a choice below to open a query form </small>
@@ -357,6 +363,7 @@ Coded by www.creative-tim.com
                   </div>
                 </div>
               </div>
+            </template>
             </div>
           </div>
     </div>
@@ -395,8 +402,10 @@ Coded by www.creative-tim.com
 <script>
 var app = new Vue({
   el: "#wrapper",
+  data: {loading:0},
   methods: {
     func_anno_search: function(){
+      this.loading = 1;
       var search_terms = $("input[id=func_anno]").val();
       var url = "http://127.0.0.1:8000/func_anno/" + search_terms;
       $.get(url, function(data, response){
@@ -404,7 +413,8 @@ var app = new Vue({
         window.open("annotation_search_results.html", "_self");
       })
       .fail(function(xhr){
-        var status = xhr.status
+        this.loading = 0;
+        var status = xhr.status;
         if (status == 404){
           alert("No matches found, please try another search");
         }
@@ -414,6 +424,7 @@ var app = new Vue({
       });
     },
     interpro_search: function(){
+      this.loading = 1;
       var search_terms = $("input[id=interpro]").val();
       var type;
       var regx = RegExp('IPR*');
@@ -423,9 +434,10 @@ var app = new Vue({
       else{
         type = "keyword";
       }
-      var url = "http://127.0.0.1:8000/interpro/" + type + "/" + search_terms;
+      var url = "http://127.0.0.1:8000/interpro/" + type + "/" + search_terms + "?limit=100";
       $.get(url, function(data, response){
         if (data.iprscan_search.length  == 0){
+          this.loading = 0;
           alert("No results found, please try another search")
         }
         else{
@@ -434,7 +446,8 @@ var app = new Vue({
       }
       })
       .fail(function(xhr){
-        var status = xhr.status
+        this.loading = 0;
+        var status = xhr.status;
         if (status == 404){
           alert("No matches found, please try another search");
         }
@@ -444,6 +457,7 @@ var app = new Vue({
       });
     },
     go_search: function(){
+      this.loading = 1;
       var search_terms = $("input[id=go]").val();
       var type;
       var regx = RegExp('GO*');
@@ -453,9 +467,10 @@ var app = new Vue({
       else{
         type = "keyword";
       }
-      var url = "http://127.0.0.1:8000/go/" + type + "/" + search_terms;
+      var url = "http://127.0.0.1:8000/go/" + type + "/" + search_terms+ "?limit=100";
       $.get(url, function(data, response){
         if (data.GO_results.length == 0){
+          this.loading = 0;
           alert("No results found, please try another search");
         }
         else{
@@ -464,6 +479,7 @@ var app = new Vue({
       }
       })
       .fail(function(xhr){
+        this.loading =0;
         var status = xhr.status
         if (status == 404){
           alert("No matches found, please try another search");
@@ -474,6 +490,7 @@ var app = new Vue({
       });
     },
     region_search: function(){
+      this.loading = 1;
       var chromosome = $("input[id=chr_seq_chr]").val();
       var start = $("input[id=chr_seq_start]").val();
       var stop = $("input[id=chr_seq_stop]").val();
@@ -492,6 +509,7 @@ var app = new Vue({
       }
       $.get(url, function(data, response){
         if (JSON.stringify(data).length > 100000){
+          this.loading = 0;
           alert("sequence is too large, please use our API");
         }
         else{
@@ -500,6 +518,7 @@ var app = new Vue({
       }
       })
       .fail(function(xhr){
+        this.loading = 0;
         var status = xhr.status
         if (status == 404){
           alert("No matches found, please try another search");
@@ -510,6 +529,7 @@ var app = new Vue({
       });
     },
     sequence_search: function(){
+      this.loading = 1
       var transcript_id = $("input[id=transcript_seq]").val();
       var type = $("input[name=seq_search]:checked").val();
       var url = "http://127.0.0.1:8000/seq/" + type + "/" + transcript_id;
@@ -518,6 +538,7 @@ var app = new Vue({
         window.open("sequence_search.html", "_self");
       })
       .fail(function(xhr){
+        this.loading = 0;
         var status = xhr.status
         if (status == 404){
           alert("No matches found, please try another search");
@@ -528,8 +549,10 @@ var app = new Vue({
       });
     },
     flanking_seq: function(){
+      this.loading = 1;
       var bp = $("input[id=flank_seq_bp]").val();
       if (bp < 0){
+        this.loading = 0;
         alert("bp must be a positive integer");
       }
       else{
@@ -538,6 +561,7 @@ var app = new Vue({
         var url = "http://127.0.0.1:8000/flanking_seq/" + direction + "/" + transcript_id + "/" + bp;
         $.get(url, function(data, response){
           if (JSON.stringify(data).length > 100000){
+            this.loading = 0;
             alert("sequence is too large, please use our API");
           }
           else{
@@ -546,6 +570,7 @@ var app = new Vue({
         }
         })
         .fail(function(xhr){
+          this.loading = 0;
           var status = xhr.status
           if (status == 404){
             alert("No matches found, please try another search");
@@ -557,6 +582,7 @@ var app = new Vue({
     }
   },
   transcript_search: function(){
+    this.loading = 1;
     var transcript_id = $("input[id=transcript_id]").val();
     var url = "http://127.0.0.1:8000/id/" + transcript_id;
     $.get(url, function(data, response){
@@ -564,6 +590,7 @@ var app = new Vue({
       window.open("transcript_search.html", "_self");
     })
     .fail(function(xhr){
+      this.loading = 0;
       var status = xhr.status
       if (status == 404){
         alert("No matches found, please try another search");
