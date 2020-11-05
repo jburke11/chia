@@ -114,12 +114,12 @@ Coded by www.creative-tim.com
       <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-12 mb-sm-8">
-              <template v-if="loading == 1">
+              <template v-if="loading">
                 <div class="align-content-cetner">
                 <img src="assets/img/loading.gif" class="mx-auto d-block"></img>
               </div>
               </template>
-              <template v-else>
+              <template v-if="!loading">
               <!-- Tabs -->
               <div class="mb-3">
                 <small class="text-uppercase font-weight-bold">click on a choice below to open a query form </small>
@@ -402,10 +402,10 @@ Coded by www.creative-tim.com
 <script>
 var app = new Vue({
   el: "#wrapper",
-  data: {loading:0},
+  data: {loading:false},
   methods: {
     func_anno_search: function(){
-      this.loading = 1;
+      this.loading = true;
       var search_terms = $("input[id=func_anno]").val();
       var url = "http://127.0.0.1:8000/func_anno/" + search_terms;
       $.get(url, function(data, response){
@@ -413,7 +413,7 @@ var app = new Vue({
         window.open("annotation_search_results.html", "_self");
       })
       .fail(function(xhr){
-        this.loading = 0;
+        app.loading = false;
         var status = xhr.status;
         if (status == 404){
           alert("No matches found, please try another search");
@@ -437,7 +437,7 @@ var app = new Vue({
       var url = "http://127.0.0.1:8000/interpro/" + type + "/" + search_terms + "?limit=100";
       $.get(url, function(data, response){
         if (data.iprscan_search.length  == 0){
-          this.loading = 0;
+          app.loading = false;
           alert("No results found, please try another search")
         }
         else{
@@ -446,7 +446,7 @@ var app = new Vue({
       }
       })
       .fail(function(xhr){
-        this.loading = 0;
+        app.loading = false;
         var status = xhr.status;
         if (status == 404){
           alert("No matches found, please try another search");
@@ -470,7 +470,7 @@ var app = new Vue({
       var url = "http://127.0.0.1:8000/go/" + type + "/" + search_terms+ "?limit=100";
       $.get(url, function(data, response){
         if (data.GO_results.length == 0){
-          this.loading = 0;
+          app.loading = false;
           alert("No results found, please try another search");
         }
         else{
@@ -509,7 +509,7 @@ var app = new Vue({
       }
       $.get(url, function(data, response){
         if (JSON.stringify(data).length > 100000){
-          this.loading = 0;
+          app.loading = false;
           alert("sequence is too large, please use our API");
         }
         else{
@@ -518,7 +518,7 @@ var app = new Vue({
       }
       })
       .fail(function(xhr){
-        this.loading = 0;
+        app.loading = false;
         var status = xhr.status
         if (status == 404){
           alert("No matches found, please try another search");
@@ -538,7 +538,7 @@ var app = new Vue({
         window.open("sequence_search.html", "_self");
       })
       .fail(function(xhr){
-        this.loading = 0;
+        app.loading = false;
         var status = xhr.status
         if (status == 404){
           alert("No matches found, please try another search");
@@ -552,7 +552,7 @@ var app = new Vue({
       this.loading = 1;
       var bp = $("input[id=flank_seq_bp]").val();
       if (bp < 0){
-        this.loading = 0;
+        app.loading = false;
         alert("bp must be a positive integer");
       }
       else{
@@ -561,7 +561,7 @@ var app = new Vue({
         var url = "http://127.0.0.1:8000/flanking_seq/" + direction + "/" + transcript_id + "/" + bp;
         $.get(url, function(data, response){
           if (JSON.stringify(data).length > 100000){
-            this.loading = 0;
+            app.loading = false;
             alert("sequence is too large, please use our API");
           }
           else{
@@ -570,7 +570,7 @@ var app = new Vue({
         }
         })
         .fail(function(xhr){
-          this.loading = 0;
+          app.loading = false;
           var status = xhr.status
           if (status == 404){
             alert("No matches found, please try another search");
@@ -590,7 +590,7 @@ var app = new Vue({
       window.open("transcript_search.html", "_self");
     })
     .fail(function(xhr){
-      this.loading = 0;
+      app.loading = false;
       var status = xhr.status
       if (status == 404){
         alert("No matches found, please try another search");
