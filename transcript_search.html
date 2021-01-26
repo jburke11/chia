@@ -150,6 +150,13 @@ Coded by www.creative-tim.com
                         <p><b>Locus Name:</b> {{transcript_data.gene_id}}</p>
                       </div>
                     </div>
+                    <template v-if="transcript_data.alt_splices.length > 1">
+                      <div class="row" v-for="splice in transcript_data.alt_splices">
+                        <div class="col-md-6">
+                          <p><b>Alternative Splice Form</b> {{splice}} </p>
+                        </div>
+                      </div>
+                  </template>
                   </div>
                 </div>
               </div>

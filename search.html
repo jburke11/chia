@@ -165,7 +165,23 @@ Coded by www.creative-tim.com
                             </div>
                           </div>
                         </div>
+                        <div class="row">
+                          <div class ="col-md-6">
+                            <p class="description">Species:</p>
+                            </div>
+                            <div class="col-md-6">
+                            <select class="form-control form-select" aria-label="select" id="func_anno_select">
+                              <option value="salvia_hispanica">Salvia hispanica</option>
+                              <option value="tectona_grandis">Tectona grandis</option>
+                              <option value="callicarpa_americana">Callicarpa americana</option>
+                              <option value="nepeta_cataria">Nepeta cataria</option>
+                              <option value="nepeta_mussinii">Nepeta mussinii</option>
+                              <option value="hyssopus_officinalis">Hyssopus officinalis</option>
+                            </select>
+                          </div>
+                        </div>
                       </form>
+                      <br>
                       <div class="text-center">
                       <button type="button" class="btn btn-primary" v-on:click="func_anno_search">Submit</button>
                     </div>
@@ -184,7 +200,23 @@ Coded by www.creative-tim.com
                             </div>
                           </div>
                         </div>
+                        <div class="row">
+                          <div class ="col-md-6">
+                            <p class="description">Species:</p>
+                            </div>
+                            <div class="col-md-6">
+                            <select class="form-control form-select" aria-label="select" id="interpro_species_select">
+                              <option value="salvia_hispanica">Salvia hispanica</option>
+                              <option value="tectona_grandis">Tectona grandis</option>
+                              <option value="callicarpa_americana">Callicarpa americana</option>
+                              <option value="nepeta_cataria">Nepeta cataria</option>
+                              <option value="nepeta_mussinii">Nepeta mussinii</option>
+                              <option value="hyssopus_officinalis">Hyssopus officinalis</option>
+                            </select>
+                          </div>
+                        </div>
                       </form>
+                      <br>
                       <div class="text-center">
                       <button type="button" class="btn btn-primary"  v-on:click="interpro_search">Submit</button>
                     </div>
@@ -203,7 +235,23 @@ Coded by www.creative-tim.com
                             </div>
                           </div>
                         </div>
+                        <div class="row">
+                          <div class ="col-md-6">
+                            <p class="description">Species:</p>
+                            </div>
+                            <div class="col-md-6">
+                            <select class="form-control form-select" aria-label="select" id="go_species_select">
+                              <option value="salvia_hispanica">Salvia hispanica</option>
+                              <option value="tectona_grandis">Tectona grandis</option>
+                              <option value="callicarpa_americana">Callicarpa americana</option>
+                              <option value="nepeta_cataria">Nepeta cataria</option>
+                              <option value="nepeta_mussinii">Nepeta mussinii</option>
+                              <option value="hyssopus_officinalis">Hyssopus officinalis</option>
+                            </select>
+                          </div>
+                        </div>
                       </form>
+                      <br>
                       <div class="text-center">
                       <button type="button" class="btn btn-primary" v-on:click="go_search">Submit</button>
                     </div>
@@ -222,7 +270,23 @@ Coded by www.creative-tim.com
                             </div>
                           </div>
                         </div>
+                        <div class="row">
+                          <div class ="col-md-6">
+                            <p class="description">Species:</p>
+                            </div>
+                            <div class="col-md-6">
+                            <select class="form-control form-select" aria-label="select" id="transcript_species_select">
+                              <option value="salvia_hispanica">Salvia hispanica</option>
+                              <option value="tectona_grandis">Tectona grandis</option>
+                              <option value="callicarpa_americana">Callicarpa americana</option>
+                              <option value="nepeta_cataria">Nepeta cataria</option>
+                              <option value="nepeta_mussinii">Nepeta mussinii</option>
+                              <option value="hyssopus_officinalis">Hyssopus officinalis</option>
+                            </select>
+                          </div>
+                        </div>
                       </form>
+                      <br>
                       <div class="text-center">
                       <button type="button" class="btn btn-primary" v-on:click="transcript_search">Submit</button>
                     </div>
@@ -412,7 +476,8 @@ var app = new Vue({
     func_anno_search: function(){
       this.loading = true;
       var search_terms = $("input[id=func_anno]").val();
-      var url = "http://127.0.0.1:8000/func_anno/" + search_terms;
+      var species = $("select[id=func_anno_select]").val();
+      var url = "http://127.0.0.1:8000/func_anno/" + species + "/" + search_terms;
       $.get(url, function(data, response){
         sessionStorage.setItem("func_anno", JSON.stringify(data));
         window.open("annotation_search_results.html", "_self");
@@ -431,6 +496,7 @@ var app = new Vue({
     interpro_search: function(){
       this.loading = 1;
       var search_terms = $("input[id=interpro]").val();
+      var species = $("select[id=interpro_species_select]").val();
       var type;
       var regx = RegExp('IPR*');
       if (regx.test(search_terms) == true){
@@ -439,7 +505,7 @@ var app = new Vue({
       else{
         type = "keyword";
       }
-      var url = "http://127.0.0.1:8000/interpro/" + type + "/" + search_terms + "?limit=100";
+      var url = "http://127.0.0.1:8000/interpro/" + species + "/" + type + "/" + search_terms + "?limit=100";
       $.get(url, function(data, response){
         if (data.iprscan_search.length  == 0){
           app.loading = false;
@@ -464,6 +530,7 @@ var app = new Vue({
     go_search: function(){
       this.loading = 1;
       var search_terms = $("input[id=go]").val();
+      var species = $("select[id=go_species_select]").val();
       var type;
       var regx = RegExp('GO*');
       if (regx.test(search_terms) == true){
@@ -472,7 +539,7 @@ var app = new Vue({
       else{
         type = "keyword";
       }
-      var url = "http://127.0.0.1:8000/go/" + type + "/" + search_terms+ "?limit=100";
+      var url = "http://127.0.0.1:8000/go/" + species + "/" + type + "/" + search_terms+ "?limit=100";
       $.get(url, function(data, response){
         if (data.GO_results.length == 0){
           app.loading = false;
@@ -589,7 +656,8 @@ var app = new Vue({
   transcript_search: function(){
     this.loading = 1;
     var transcript_id = $("input[id=transcript_id]").val();
-    var url = "http://127.0.0.1:8000/id/" + transcript_id;
+    var species = $("select[id=transcript_species_select]").val();
+    var url = "http://127.0.0.1:8000/id/" + species + "/" + transcript_id;
     $.get(url, function(data, response){
       sessionStorage.setItem("transcript_search", JSON.stringify(data));
       window.open("transcript_search.html", "_self");
