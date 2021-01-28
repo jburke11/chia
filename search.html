@@ -262,7 +262,7 @@ Coded by www.creative-tim.com
                           <div class="col-md-6">
                             <p class="description">Transcript ID:</p>
 
-                            <p class="description"> Examples: Salhi.01G743300.1, Salhi.03G612000.2, Salhi.04G466100.1
+                            <p class="description"> Examples: Salhi.01G743300.1, Tg01g00110.t1, g10011.t1
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
@@ -311,6 +311,22 @@ Coded by www.creative-tim.com
                           </div>
                         </div>
                         <div class="row">
+                          <div class ="col-md-6 mb-sm-3">
+                            <p class="description">Species:</p>
+                            </div>
+                            <div class="col-md-6 mb-sm-3">
+                            <select class="form-control form-select" aria-label="select" id="seq_species_select">
+                              <option value="salvia_hispanica">Salvia hispanica</option>
+                              <option value="tectona_grandis">Tectona grandis</option>
+                              <option value="callicarpa_americana">Callicarpa americana</option>
+                              <option value="nepeta_cataria">Nepeta cataria</option>
+                              <option value="nepeta_mussinii">Nepeta mussinii</option>
+                              <option value="hyssopus_officinalis">Hyssopus officinalis</option>
+                            </select>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row">
                           <div class="col-md-6 mb-sm-3">
                             <p class="description">Start Coordinate:</p>
 
@@ -349,7 +365,7 @@ Coded by www.creative-tim.com
                         <div class="col-md-6 mb-sm-3">
                           <p class="description">Transcript ID:</p>
 
-                          <p class="description"> Examples: Salhi.01G743300.1, Salhi.03G612000.2, Salhi.04G466100.1 </p>
+                          <p class="description"> Examples: Salhi.01G743300.1, Tg01g00110.t1, g10011.t1 </p>
                         </div>
                         <div class="col-md-6 mb-sm-3">
                           <div class="form-group">
@@ -357,6 +373,22 @@ Coded by www.creative-tim.com
                           </div>
                         </div>
                       </div>
+                      <div class="row">
+                        <div class ="col-md-6 mb-sm-3">
+                          <p class="description">Species:</p>
+                          </div>
+                          <div class="col-md-6 mb-sm-3">
+                          <select class="form-control form-select" aria-label="select" id="transcript_seq_species_select">
+                            <option value="salvia_hispanica">Salvia hispanica</option>
+                            <option value="tectona_grandis">Tectona grandis</option>
+                            <option value="callicarpa_americana">Callicarpa americana</option>
+                            <option value="nepeta_cataria">Nepeta cataria</option>
+                            <option value="nepeta_mussinii">Nepeta mussinii</option>
+                            <option value="hyssopus_officinalis">Hyssopus officinalis</option>
+                          </select>
+                        </div>
+                      </div>
+                      <br>
                       <div class="row">
                         <div class="col-md-6 mb-sm-3">
                           <p class="description">Sequence Type</p>
@@ -416,7 +448,7 @@ Coded by www.creative-tim.com
                       <div class="col-md-6 mb-sm-3">
                         <p class="description">Transcript ID:</p>
 
-                        <p class="description"> Examples: Salhi.01G743300.1, Salhi.03G612000.2, Salhi.04G466100.1 </p>
+                        <p class="description"> Examples: Salhi.01G743300.1, Tg01g00110.t1, g10011.t1 </p>
                       </div>
                       <div class="col-md-6 mb-sm-3">
                         <div class="form-group">
@@ -424,6 +456,22 @@ Coded by www.creative-tim.com
                         </div>
                       </div>
                     </div>
+                    <div class="row">
+                      <div class ="col-md-6 mb-sm-3">
+                        <p class="description">Species:</p>
+                        </div>
+                        <div class="col-md-6 mb-sm-3">
+                        <select class="form-control form-select" aria-label="select" id="flanking_seq_species_select">
+                          <option value="salvia_hispanica">Salvia hispanica</option>
+                          <option value="tectona_grandis">Tectona grandis</option>
+                          <option value="callicarpa_americana">Callicarpa americana</option>
+                          <option value="nepeta_cataria">Nepeta cataria</option>
+                          <option value="nepeta_mussinii">Nepeta mussinii</option>
+                          <option value="hyssopus_officinalis">Hyssopus officinalis</option>
+                        </select>
+                      </div>
+                    </div>
+                    <br>
                   </form>
                   <div class="text-center mb-sm-6">
                   <button type="button" class="btn btn-primary" v-on:click="flanking_seq">Submit</button>
@@ -566,18 +614,19 @@ var app = new Vue({
       var chromosome = $("input[id=chr_seq_chr]").val();
       var start = $("input[id=chr_seq_start]").val();
       var stop = $("input[id=chr_seq_stop]").val();
+      var species = $("select[id=seq_species_select]").val();
       var url;
       if (start && stop){
-        url = "http://127.0.0.1:8000/seq_chr/" + chromosome + "?" + "start=" + start + "&" + "stop=" + stop;
+        url = "http://127.0.0.1:8000/seq_chr/" + species + "/" + chromosome + "?" + "start=" + start + "&" + "stop=" + stop;
       }
       else if (start && !stop){
-        url = "http://127.0.0.1:8000/seq_chr/" + chromosome + "?" + "start=" + start;
+        url = "http://127.0.0.1:8000/seq_chr/" + species + "/" + chromosome + "?" + "start=" + start;
       }
       else if (stop && !start){
-        url = "http://127.0.0.1:8000/seq_chr/" + chromosome + "?" + "stop=" + stop;
+        url = "http://127.0.0.1:8000/seq_chr/" + species + "/" + chromosome + "?" + "stop=" + stop;
       }
       else{
-        url = "http://127.0.0.1:8000/seq_chr/" + chromosome;
+        url = "http://127.0.0.1:8000/seq_chr/" + species + "/" +  chromosome;
       }
       $.get(url, function(data, response){
         if (JSON.stringify(data).length > 100000){
@@ -603,8 +652,9 @@ var app = new Vue({
     sequence_search: function(){
       this.loading = 1
       var transcript_id = $("input[id=transcript_seq]").val();
+      var species = $("select[id=transcript_seq_species_select]").val();
       var type = $("input[name=seq_search]:checked").val();
-      var url = "http://127.0.0.1:8000/seq/" + type + "/" + transcript_id;
+      var url = "http://127.0.0.1:8000/seq/" + species + "/" + type + "/" + transcript_id;
       $.get(url, function(data, response){
         sessionStorage.setItem("seq_search", JSON.stringify(data));
         window.open("sequence_search.html", "_self");
@@ -623,6 +673,7 @@ var app = new Vue({
     flanking_seq: function(){
       this.loading = 1;
       var bp = $("input[id=flank_seq_bp]").val();
+      var species = $("select[id=flanking_seq_species_select]").val();
       if (bp < 0){
         app.loading = false;
         alert("bp must be a positive integer");
@@ -630,7 +681,7 @@ var app = new Vue({
       else{
         var direction = $("input[name=flank_direction]:checked").val();
         var transcript_id = $("input[id=flank_id]").val();
-        var url = "http://127.0.0.1:8000/flanking_seq/" + direction + "/" + transcript_id + "/" + bp;
+        var url = "http://127.0.0.1:8000/flanking_seq/" + species + "/" + direction + "/" + transcript_id + "/" + bp;
         $.get(url, function(data, response){
           if (JSON.stringify(data).length > 100000){
             app.loading = false;
